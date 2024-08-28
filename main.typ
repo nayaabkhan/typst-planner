@@ -19,12 +19,38 @@
 
 #set text(font: "HQGQAX+MrsEavesOT-Roman", size: 12pt)
 
+#let year = 2025
+#let max_days = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+
+#let heading_height = 24pt
+
+#page(paper: "a5", align(center + top)[
+    #rect(width: 100%, height: 100%, stroke: 0.5pt)[
+      #v(6em)
+      #text(16pt, tracking: 5pt, upper[
+        Daily \
+        Planner
+      ])
+      #line(length: 50%, stroke: 0.5pt + cmyk(0%, 100%, 0%, 0%))
+      #text(14pt, tracking: 2pt, emph[
+        Nayaab Khan
+      ])
+      #v(18em, weak: true)
+      #text(18pt, smallcaps[
+        #year
+      ])
+      #image("branch.svg", width: 120pt)
+    ]
+])
+
+#pagebreak()
+#pagebreak()
+
 #set page(
     paper: "a5",
-    margin: (x: 1cm, y: 1.5cm),
     header: [
       #h(1fr)
-      #emph[Daily Planner of NK]
+      #emph[Daily Planner]
       #h(1fr)
     ],
     footer: locate(loc => {
@@ -35,22 +61,18 @@
         if calc.odd(i) {
           return [
             #h(1fr)
-            #smallcaps(before.last().body.children.at(1).child)
+            #emph(before.last().body.children.at(1).child)
+            #smallcaps(year)
           ]
         }
 
         return [
-          #smallcaps(before.last().body.children.at(1).child)
+          #emph(before.last().body.children.at(1).child)
+          #smallcaps(year)
         ]
       }
     })
 )
-
-#let year = 2024
-#let max_days = (31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-
-#let heading_height = 24pt
-
 
 #let month = 1
 #while month <= 12 {
@@ -64,8 +86,13 @@
       day: day,
     )
 
-    box(height: 251pt)[
-      #line(length: 100%, stroke: 1pt + cmyk(0%, 100%, 0%, 0%))
+    let height = 100%
+    if date.weekday() == 6 or date.weekday() == 7 {
+      height = 50%
+    }
+
+    box(height: height)[
+      #line(length: 100%, stroke: 0.5pt + cmyk(0%, 100%, 0%, 0%))
       #align(
         center + top,
         strong(
@@ -107,8 +134,12 @@
       )
     ]
 
-      day = day + 1
+    if date.weekday() != 6 {
+      pagebreak()
     }
+
+    day = day + 1
+  }
 
   pagebreak()
   month = month + 1
