@@ -19,7 +19,7 @@
 
 #set text(font: "HQGQAX+MrsEavesOT-Roman", size: 12pt)
 
-#let year = 2025
+#let year = 2026
 #let max_days = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
 #let heading_height = 24pt
