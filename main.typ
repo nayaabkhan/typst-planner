@@ -24,7 +24,9 @@
 
 #let heading_height = 24pt
 
-#page(paper: "a5", align(center + top)[
+#set page(paper: "a5")
+
+#page(align(center + top)[
     #rect(width: 100%, height: 100%, stroke: 0.5pt)[
       #v(6em)
       #text(16pt, tracking: 5pt, upper[
@@ -47,7 +49,6 @@
 #pagebreak()
 
 #set page(
-    paper: "a5",
     header: [
       #h(1fr)
       #emph[Daily Planner]
