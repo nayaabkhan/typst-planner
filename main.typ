@@ -24,7 +24,7 @@
 
 #let heading_height = 24pt
 
-#set page(paper: "a5")
+#set page(width: 179mm, height: 254mm, margin: 15mm)
 
 #page(align(center + top)[
     #rect(width: 100%, height: 100%, stroke: 0.5pt)[
@@ -87,12 +87,7 @@
       day: day,
     )
 
-    let height = 100%
-    if date.weekday() == 6 or date.weekday() == 7 {
-      height = 50%
-    }
-
-    box(height: height)[
+    box(height: 47%)[
       #line(length: 100%, stroke: 0.5pt + cmyk(0%, 100%, 0%, 0%))
       #align(
         center + top,
@@ -135,9 +130,7 @@
       )
     ]
 
-    if date.weekday() != 6 {
-      pagebreak()
-    }
+    v(0pt)
 
     day = day + 1
   }
